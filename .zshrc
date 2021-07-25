@@ -3,7 +3,7 @@ export ZSH="/Users/tristansmith/.oh-my-zsh"
 ZSH_THEME="bira"
 
 plugins=(
-	git
+  git
   history-substring-search
   colored-man-pages
   zsh-autosuggestions
