@@ -35,14 +35,6 @@ setup_package_manager()
 
 }
 
-install_software(){
-  if [[ "`uname`" == "Linux" ]]; then
-    installs/install_software_manjaro.sh
-  elif [[ "`uname`" == "Darwin" ]]; then
-    installs/install_software_mac.sh
-  fi
-}
-
 create_directories(){
   mkDir '~/Documents/Music Projects'
   mkDir '~/Documents/git-repos'
@@ -60,7 +52,7 @@ fi
 # set git init default branch to main
 git config --global init.defaultBranch main
 
-install_software
+installs/install.sh
 
 setup_oh_my_zsh
 
