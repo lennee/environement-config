@@ -40,7 +40,6 @@ create_directories(){
   mkDir '~/Documents/git-repos'
 }
 
-
 setup_package_manager
 
 which -s git
