@@ -1,8 +1,7 @@
 #!/bin/sh
 
-install_node_and_npm(){
+install_node_packages_and_yarn(){
   # install node version manager
-  brew install nvm
   mkDir ~/.nvm
 
   echo '# nvm import
@@ -21,12 +20,11 @@ install_node_and_npm(){
   yarn global add selenium-webdriver
 }
 
-install_python_and_packages(){
+install_python_packages(){
   # install python 3
-  brew install pyenv
   pyenv install $(pyenv install --list | grep -v - | grep -v b | tail -1)
 
-  python3 -m pip install --upgrade pip --user
+  python3 -m pip install --upgrade --user pip
 
   # read and install packages
   while IFS= read -r line; do
@@ -38,22 +36,18 @@ install_python_and_packages(){
 }
 
 
-install_python_and_packages
-install_node_and_npm
+if [[ "`uname`" == "Linux" ]]; then
+  # Installing programs
+  pacman -S code etcher nvm postman-bin pyenv slack-desktop julia tmux via-bin
 
+  pamac build spotify
+elif [[ "`uname`" == "Darwin" ]]; then
+  # Installing programs
+  brew install htop julia nvm pyenv tmux wget
 
-# Installing other programs
+  # Installing Cask Software
+  brew install --cask ableton-live-suite balenaetcher firefox postman slack spotify via visual-studio-code
+fi
 
-brew install htop
-brew install julia
-brew install tmux
-brew install wget
-
-brew install --cask ableton-live-suite
-brew install --cask balenaetcher
-brew install --cask firefox
-brew install --cask postman
-brew install --cask slack
-brew install --cask spotify
-brew install --cask via
-brew install --cask visual-studio-code
+install_python_packages
+install_node_packages_and_yarn
