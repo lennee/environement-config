@@ -57,6 +57,9 @@ if [[ $? != 0 ]] ; then
   exit 0
 fi
 
+# set git init default branch to main
+git config --global init.defaultBranch main
+
 install_software
 
 setup_oh_my_zsh
