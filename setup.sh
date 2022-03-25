@@ -15,7 +15,7 @@ setup_oh_my_zsh(){
 
   # Final themeing update to set only 2 directories shown in the clie
   sed -i '.original' $'s//Users/tristansmith/${1}' $1/.zshrc
-  sed -i '.original' "12s/.*/local current_dir='%{$terminfo[bold]$fg[blue]%}%2~ %{$reset_color%}'/" ~/.oh-my-zsh/themes/bira.zsh-theme
+  sed -i '.original' "12s/.*/local current_dir='%{$terminfo[bold]$fg[blue]%}%2~ %{$reset_color%}'/" ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
 
   source ~/.zshrc
 }
