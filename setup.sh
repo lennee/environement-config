@@ -11,9 +11,10 @@ setup_oh_my_zsh(){
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
   # pulling down .zshrc to local env
-  curl https://raw.github.com/lennee/new-distro-config/main/.zshrc -o ~/.zshrc
+  curl https://raw.githubusercontent.com/lennee/environment-config/main/.zshrc -o $1/.zshrc
 
   # Final themeing update to set only 2 directories shown in the clie
+  sed -i '.original' $'s//Users/tristansmith/${1}' $1/.zshrc
   sed -i '.original' "12s/.*/local current_dir='%{$terminfo[bold]$fg[blue]%}%2~ %{$reset_color%}'/" ~/.oh-my-zsh/themes/bira.zsh-theme
 
   source ~/.zshrc
@@ -23,6 +24,7 @@ setup_package_manager()
 {
   if [[ "`uname`" == "Linux" ]]; then
     pacman -Syu
+    HOME_DIR="/home/tristan"
   elif [[ "`uname`" == "Darwin" ]]; then
     which -s brew
     if [[ $? != 0 ]] ; then
@@ -31,16 +33,16 @@ setup_package_manager()
     else
         brew update
     fi
+    HOME_DIR="~"
   fi
-
 }
 
 create_directories(){
-  mkDir '~/Documents/Music Projects'
-  mkDir '~/Documents/git-repos'
+  mkdir '~/Documents/Music Projects'
+  mkdir '~/Documents/git-repos'
 }
 
-setup_package_manager
+#setup_package_manager
 
 which -s git
 if [[ $? != 0 ]] ; then
@@ -51,9 +53,9 @@ fi
 # set git init default branch to main
 git config --global init.defaultBranch main
 
-installs/install.sh
+#installs/install.sh
 
-setup_oh_my_zsh
+setup_oh_my_zsh ${HOME_DIR}
 
 create_directories
 
